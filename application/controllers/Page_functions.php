@@ -29,30 +29,10 @@ class Page_functions extends CI_Controller {
 			return true;
 	}
 
-	public function view($slug = NULL)
-	{
-			$data['news_item'] = $this->profile_model->get_news($slug);
 
-			if (empty($data['news_item']))
-			{
-					show_404();
-			}
-
-			$data['title'] = $data['news_item']['title'];
-			$this->load->view('templates/header', $data);
-			$this->load->view('pages/view', $data);
-			$this->load->view('templates/footer');
-	}
-			
 	
-		public function index(){
-
-        $data['news'] = $this->profile_model->get_news();
-        $data['title'] = 'Project archive';
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('pages/index', $data);        
-        $this->load->view('templates/footer', $data);
+	public function index(){
+		redirect('login', 'refresh');
 	}
 	
 		
@@ -60,15 +40,15 @@ class Page_functions extends CI_Controller {
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->library('encryption');
+		//~ $this->load->library('encryption');
 		
 		$data['title'] = 'Register Profile';
 
 		$this->form_validation->set_rules('username', 'username', 'required');
 		$this->form_validation->set_rules('password', 'password', 'required');
 		$this->form_validation->set_rules('emailAddress', 'emailAddress', 'required');
-		$password = 'mypassword';
-		$hash = crypt($password);
+		//~ $password = 'mypassword';
+		//~ $hash = crypt($password);
 
 		if ($this->form_validation->run() === FALSE)
 		{
